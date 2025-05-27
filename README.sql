@@ -67,8 +67,5 @@ BEGIN
 		    update cliente SET saldo = saldo - new.valor; --Acstualiza  el slado del cliente
         ELSE
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No cuentas con el saldo suficiente para la compra'; --Lanza un error si el saldo no es suficiente
-        END IF; 
-	    else
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No cuentas con el saldo suficiente para la compra';
 	end if;
 END
