@@ -64,16 +64,11 @@ BEGIN
         where new.id_cli = cliente.id_cli;
 	    
         IF NEW.valor <=	sal THEN -- Verifica si el valor de la compra es menor o igual al saldo del cliente
-		    update cliente SET saldo = saldo - new.valor; -Actualiza el saldo del cliente restando el valor de la compra
+		    update cliente SET saldo = saldo - new.valor; --Acstualiza  el slado del cliente
         ELSE
-            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No cuentas con el saldo suficiente para la compra'; -- Lanza un error si no hay saldo suficiente
-        END IF;
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No cuentas con el saldo suficiente para la compra'; --Lanza un error si el saldo no es suficiente
+        END IF; 
 	    else
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No cuentas con el saldo suficiente para la compra';
 	end if;
 END
-
-# Insertar datos de prueba
-
-INSERT INTO cliente VALUES(1234,"Juan","Perez",100000);
-CALL new_compra(100000,1234);
